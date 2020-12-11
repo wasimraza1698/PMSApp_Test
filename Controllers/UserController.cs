@@ -8,24 +8,37 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using PharmacyMedicineSupply.Models;
+using PharmacyMedicineSupply.Providers;
 
 namespace PharmacyMedicineSupply.Controllers
 {
     public class UserController : Controller
     {
+        private readonly log4net.ILog _log = log4net.LogManager.GetLogger(typeof(UserController));
+        private readonly IUserProvider _userProvider;
+
+        public UserController(IUserProvider userProvider)
+        {
+            _userProvider = userProvider;
+        }
+        
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString("token") == null)
             {
+                _log.Info("token not found");
                 return RedirectToAction("Login");
             }
             else
             {
+                _log.Info("Displaying Home Page");
                 return View();
             }
         }
         public IActionResult Login()
         {
+            _log.Info("Displaying Login Page");
+            
             return View();
         }
 
@@ -33,24 +46,20 @@ namespace PharmacyMedicineSupply.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(User credentials)
         {
-            using (var httpClient = new HttpClient())
+            HttpResponseMessage response = await  _userProvider.Login(credentials);
+            if (response.IsSuccessStatusCode)
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(credentials),Encoding.UTF8,"application/json");
-                var response = await httpClient.PostAsync("https://localhost:44300/User/Login", content);
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsStringAsync();
-                    JWT token = JsonConvert.DeserializeObject<JWT>(result);
-                    HttpContext.Session.SetString("token", token.Token);
-                    HttpContext.Session.SetString("userName", credentials.UserName);
-                    ViewBag.UserName = credentials.UserName;
-                    return View("Index");
-                }
-                else
-                {
-                    ViewBag.Info = "Invalid username/password";
-                    return View();
-                }
+                var result = await response.Content.ReadAsStringAsync();
+                JWT token = JsonConvert.DeserializeObject<JWT>(result);
+                HttpContext.Session.SetString("token",token.Token);
+                HttpContext.Session.SetString("userName", credentials.UserName);
+                ViewBag.UserName = credentials.UserName;
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.Info = "Invalid username/password";
+                return View();
             }
         }
         public IActionResult Logout()

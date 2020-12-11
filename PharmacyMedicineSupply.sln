@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyMedicineSupply", "PharmacyMedicineSupply.csproj", "{7ECE77FF-96E3-438E-99F0-F9B7DA8F62FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService", "..\AuthService\AuthService.csproj", "{8C96D149-5548-41C9-AE26-144AE5534274}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService", "..\AuthService\AuthService.csproj", "{9AB72405-BC38-4757-8722-E504E79D25BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{7ECE77FF-96E3-438E-99F0-F9B7DA8F62FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7ECE77FF-96E3-438E-99F0-F9B7DA8F62FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7ECE77FF-96E3-438E-99F0-F9B7DA8F62FF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8C96D149-5548-41C9-AE26-144AE5534274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8C96D149-5548-41C9-AE26-144AE5534274}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8C96D149-5548-41C9-AE26-144AE5534274}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8C96D149-5548-41C9-AE26-144AE5534274}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB72405-BC38-4757-8722-E504E79D25BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB72405-BC38-4757-8722-E504E79D25BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB72405-BC38-4757-8722-E504E79D25BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB72405-BC38-4757-8722-E504E79D25BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
